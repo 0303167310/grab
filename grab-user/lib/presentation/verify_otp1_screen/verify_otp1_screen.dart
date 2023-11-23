@@ -1,0 +1,9 @@
+import 'package:flutter/material.dart';import 'package:team_grab/core/app_export.dart';import 'package:team_grab/widgets/app_bar/appbar_leading_image.dart';import 'package:team_grab/widgets/app_bar/appbar_subtitle.dart';import 'package:team_grab/widgets/app_bar/custom_app_bar.dart';import 'package:team_grab/widgets/custom_elevated_button.dart';import 'package:team_grab/widgets/custom_pin_code_text_field.dart';class VerifyOtp1Screen extends StatelessWidget {const VerifyOtp1Screen({Key? key}) : super(key: key);
+
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return SafeArea(child: Scaffold(resizeToAvoidBottomInset: false, appBar: _buildAppBar(context), body: Container(width: double.maxFinite, padding: EdgeInsets.symmetric(horizontal: 15.h, vertical: 18.v), child: Column(children: [Text("Phone verification", style: theme.textTheme.headlineSmall), SizedBox(height: 11.v), Text("Enter your OTP code", style: CustomTextStyles.bodyLargeGray500), SizedBox(height: 37.v), Padding(padding: EdgeInsets.only(left: 36.h, right: 37.h), child: CustomPinCodeTextField(context: context, onChanged: (value) {})), SizedBox(height: 20.v), RichText(text: TextSpan(children: [TextSpan(text: "Didn’t receive code? ", style: theme.textTheme.titleMedium), TextSpan(text: "Resend again", style: CustomTextStyles.titleMediumPrimary_1)]), textAlign: TextAlign.left), Spacer(flex: 52), CustomElevatedButton(text: " Verify"), Spacer(flex: 47)])))); } 
+/// Section Widget
+PreferredSizeWidget _buildAppBar(BuildContext context) { return CustomAppBar(leadingWidth: 32.h, leading: AppbarLeadingImage(imagePath: ImageConstant.imgArrowLeftGray900, margin: EdgeInsets.only(left: 8.h, top: 16.v, bottom: 15.v), onTap: () {onTapArrowLeft(context);}), title: AppbarSubtitle(text: "Back", margin: EdgeInsets.only(left: 5.h))); } 
+
+/// Navigates back to the previous screen.
+onTapArrowLeft(BuildContext context) { Navigator.pop(context); } 
+ }
