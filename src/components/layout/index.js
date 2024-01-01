@@ -1,6 +1,5 @@
-import Header from './header'
 import Sidebar from './sidebar'
-
+import Header from './header'
 function Layout( {children} ){
     return (
         <div>
@@ -8,7 +7,7 @@ function Layout( {children} ){
             <div classname = 'container'>
                 <Sidebar />
                 <div classname = 'content'>
-                    {children}
+                   {children}
                 </div>
             </div>
         </div>
