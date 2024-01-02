@@ -108,10 +108,10 @@
   
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-              // Signed in 
               const user = userCredential.user;
               console.log(user);
               alert(user.email+" Login successfully!!!");
+              window.location.href = 'doc/index.html'
             })
             .catch((error) => {
               const errorCode = error.code;
