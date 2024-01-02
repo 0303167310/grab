@@ -32,13 +32,13 @@
                 <!--=====TIÊU Đ======-->
                 <form class="login100-form validate-form">
                     <span class="login100-form-title">
-                        <b>ĐĂNG NHẬP HỆ THỐNG QUẢN LÝ</b>
+                        <b>ĐĂNG NHẬP HỆ THỐNG QUẢN LÝ NHÂN VIÊN</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
                     <form action="">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="username"
-                                id="username">
+                            <input class="input100" type="text" placeholder="Tài khoản quản trị" name="login_email"
+                                id="login_email">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                                name="current-password" id="password-field">
+                                name="login_password" id="login_password">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
@@ -56,11 +56,11 @@
 
                         <!--=====ĐĂNG NHẬP======-->
                         <div class="container-login100-form-btn">
-                            <input type="button" value="Đăng nhập" id="submit" onclick="validate()" />
+                            <input type="button" value="Đăng nhập" id="login" name="login" onclick="validate()" />
                         </div>
                         <!--=====LINK TÌM MẬT KHẨU======-->
                         <div class="text-right p-t-12">
-                            <a class="txt2" href="/forgot.html">
+                            <a class="txt2" href="forgot.html">
                                 Bạn quên mật khẩu?
                             </a>
                         </div>
@@ -76,30 +76,73 @@
         </div>
     </div>
     <!--Javascript-->
-    <script src="/js/main.js"></script>
     <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="vendor/bootstrap/js/popper.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
-    <script type="text/javascript">
-        //show - hide mật khẩu
-        function myFunction() {
-            var x = document.getElementById("myInput");
-            if (x.type === "password") {
-                x.type = "text"
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqgma17cNu79L6BT0ZkRwOXZQ5la_gJVI",
+            authDomain: "grab-admin.firebaseapp.com",
+            databaseURL: "https://grab-admin-default-rtdb.firebaseio.com",
+            projectId: "grab-admin",
+            storageBucket: "grab-admin.appspot.com",
+            messagingSenderId: "144369812400",
+            appId: "1:144369812400:web:fbf779f152092a01cd0c75"
+          };
+  
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth();
+        console.log(app);
+
+        //----- Login code start	  
+        document.getElementById("login").addEventListener("click", function() {
+            var email =  document.getElementById("login_email").value;
+            var password = document.getElementById("login_password").value;
+  
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed in 
+              const user = userCredential.user;
+              console.log(user);
+              alert(user.email+" Login successfully!!!");
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+              console.log(errorMessage);
+              alert(errorMessage);
+            });		  		  
+        });
+        
+        //----- End
+  
+      </script>
+      <script type="text/javascript">
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("login_password");
+            var passwordIcon = document.querySelector(".click-eye i");
+    
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("bx-hide");
+                passwordIcon.classList.add("bx-show");
             } else {
-                x.type = "password";
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("bx-show");
+                passwordIcon.classList.add("bx-hide");
             }
         }
-        $(".click-eye").click(function () {
-            $(this).toggleClass("bx-show bx-hide");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
+    
+        document.querySelector(".click-eye").addEventListener("click", function () {
+            togglePasswordVisibility();
         });
     </script>
 </body>
