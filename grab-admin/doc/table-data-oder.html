@@ -18,7 +18,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+  <script type="module" src="js/customers.js"></script>
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -103,85 +103,22 @@
                 </div>
               </div>
               <table class="table table-hover table-bordered" id="sampleTable">
-                <thead>
-                  <tr>
-                    <th width="10"><input type="checkbox" id="all"></th>
-                    <th>ID khách hàng</th>
-                    <th>Khách hàng</th>
-                    <th>Số điện thoại</th>
-                    <th>Hạng</th>
-                    <th>Tổng số tiền đã thanh toán </th>
-                    <th>Tính năng</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
-                    <td>Triệu Thanh Phú</td>
-                    <td>0798646621</td>
-                    <td>Kim Cương</td>
-                    <td>9.400.000 đ</td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MĐ8265</td>
-                    <td>Nguyễn Thị Ngọc Cẩm</td>
-                    <td>0354983823</td>
-                    <td>Vàng</td>
-                    <td>3.800.000 đ</td>                 
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MT9835</td>
-                    <td>Đặng Hoàng Phúc</td>
-                    <td>0239478923</td>
-                    <td>Bạc</td>
-                    <td>2.000.000 đ</td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>ER3835</td>
-                    <td>Nguyễn Thị Mỹ Yến</td>
-                    <td>0648793722</td>
-                    <td>Bạc </td>
-                    <td>1.990.000 đ</td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>AL3947</td>
-                    <td>Phạm Thị Ngọc</td>
-                    <td>0463729420</td>
-                    <td>Bạc </td>
-                    <td>1.676.000 đ</td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>QY8723</td>
-                    <td>Ngô Thái An</td>
-                    <td>0629285013</td>
-                    <td>Đồng </td>
-                    <td>500.000 đ</td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
     </main>
+  <!-- Delete a record -->
+  <script type="module">
+    import { deleteCustomerDoc } from './js/customers.js';
+    function deleteCustomer(button){
+      let row = button.closest("tr");
+      let id = row.children[1].textContent;
+      deleteCustomerDoc(id);
+    }
+    window.deleteCustomer = deleteCustomer;
+  </script>
   <!-- Essential javascripts for application to work-->
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/popper.min.js"></script>
